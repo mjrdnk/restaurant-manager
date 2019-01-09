@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./NotFound.css";
+import "./NotFound.scss";
 import { NavLink } from "react-router-dom";
 
 class NotFound extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Login.css";
+import "./Login.scss";
 
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./DishList.css";
+import "./DishList.scss";
 
 class DishList extends Component {
   render() {
