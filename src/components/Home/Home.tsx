@@ -4,18 +4,18 @@ import { Route, Redirect } from "react-router-dom";
 
 import Navigation from "../Navigation/Navigation";
 import DishList from "../DishList/DishList";
+import Button from "@material-ui/core/Button";
 
-// interface Props {
-//   // https://reacttraining.com/react-router/web/api/match
-//   match: {
-//     params: any;
-//     isExact: boolean;
-//     path: string;
-//     url: string;
-//   };
-// }
+import { observer, inject } from "mobx-react";
+import { IAuthStore } from "../../stores/authStore";
 
-class Home extends Component {
+interface LoginProps {
+  authStore?: IAuthStore;
+}
+
+@inject("authStore")
+@observer
+class Home extends Component<LoginProps> {
   // isAuthenticated should be retrieved from localstorage
   isAuthenticated: boolean = true;
 
@@ -23,6 +23,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <Navigation />
+        <Button onClick={() => this.logOut()}>Log out</Button>
         <span>Restaurant manager</span>
 
         <Route
@@ -35,6 +36,11 @@ class Home extends Component {
         />
       </div>
     );
+  }
+
+  logOut() {
+    const { authenticate } = this.props.authStore!;
+    authenticate(false);
   }
 }
 

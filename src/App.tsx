@@ -11,11 +11,19 @@ import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
 
-class App extends Component {
-  // isAuthenticated should be retrieved from localstorage
-  isAuthenticated: boolean = true;
+import { observer, inject } from "mobx-react";
+import { IAuthStore } from "./stores/authStore";
 
+interface AppProps {
+  authStore?: IAuthStore;
+}
+
+@inject("authStore")
+@observer
+class App extends Component<AppProps> {
   render() {
+    const { isAuthenticated } = this.props.authStore!;
+
     return (
       <Router>
         <div className="App">
@@ -24,14 +32,12 @@ class App extends Component {
               exact
               path="/"
               render={() =>
-                this.isAuthenticated ? <Redirect to="/home" /> : <Login />
+                isAuthenticated ? <Redirect to="/home" /> : <Login />
               }
             />
             <Route
               path="/home"
-              render={() =>
-                this.isAuthenticated ? <Home /> : <Redirect to="/" />
-              }
+              render={() => (isAuthenticated ? <Home /> : <Redirect to="/" />)}
             />
             <Route component={NotFound} />
           </Switch>
