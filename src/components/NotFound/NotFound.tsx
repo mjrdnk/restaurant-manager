@@ -1,16 +1,10 @@
-import React, { Component } from "react";
-import "./NotFound.scss";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { Redirect } from "react-router-dom";
 
-class NotFound extends Component {
-  render() {
-    return (
-      <div className="NotFound">
-        <span>Ooops.. Page has not been found!</span>
-        <NavLink to="/home">Go back Home</NavLink>
-      </div>
-    );
-  }
-}
+const NotFound = () => {
+  // maybe move this logic to render of Route in App.tsx
+  // if authentication state will be lost after reload
+  return <Redirect to="/" />;
+};
 
 export default NotFound;
