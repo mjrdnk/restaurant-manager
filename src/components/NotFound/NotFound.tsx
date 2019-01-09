@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./NotFound.css";
-import { Button } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 
 class NotFound extends Component {
   render() {
     return (
       <div className="NotFound">
         <span>Ooops.. Page has not been found!</span>
-        <Button>Go back home</Button>
+        <NavLink to="/home">Go back Home</NavLink>
       </div>
     );
   }

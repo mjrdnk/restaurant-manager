@@ -1,2 +1,4 @@
 .NotFound {
+  display: flex;
+  flex-direction: column;
 }
