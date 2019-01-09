@@ -1,3 +1,21 @@
+## Installation & Usage
+
+```
+git clone https://github.com/mjrdnk/restaurant-manager.git
+cd restaurant-manager/
+yarn install
+npm start
+```
+
+If http://localhost:3000 didn't open in your default browser, try navigating there manually.
+
+
+## UI
+
+This project is using ui library [Material UI](https://material-ui.com)
+
+## Framework
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -42,8 +60,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-
-## UI part
-
-This project is using ui library [Material UI](https://material-ui.com)
