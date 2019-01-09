@@ -15,6 +15,10 @@ username: test
 password: test123
 ```
 
+## State management
+
+This project is using state management library [MobX](https://mobx.js.org/)
+
 ## UI
 
 This project is using ui library [Material UI](https://material-ui.com)
