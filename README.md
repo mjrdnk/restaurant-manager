@@ -9,6 +9,10 @@ npm start
 
 If http://localhost:3000 didn't open in your default browser, try navigating there manually.
 
+To log in please use those credentials:
+username: test
+password: test123
+
 
 ## UI
 
