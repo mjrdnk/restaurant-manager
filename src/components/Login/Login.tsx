@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 
 import { observer, inject } from "mobx-react";
-import { IAuthStore, AuthStore } from "../../stores/authStore";
+import { IAuthStore } from "../../stores/authStore";
 import { verySecretConfig } from "../../config";
 
 interface LoginProps {
@@ -20,21 +20,15 @@ interface LoginState {
 @inject("authStore")
 @observer
 class Login extends Component<LoginProps, LoginState> {
-  constructor(props: LoginProps) {
-    super(props);
-
-    this.state = {
-      password: "",
-      username: ""
-    };
-  }
+  state = {
+    password: "",
+    username: ""
+  };
 
   render() {
     return (
       <div className="Login">
-        <span>
-          Please login with your username and password ({this.state.password})
-        </span>
+        <span>Please login with your username and password</span>
 
         <Input
           type="username"
@@ -59,22 +53,22 @@ class Login extends Component<LoginProps, LoginState> {
 
   private setUsername(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  ): void {
     this.setState({ username: event.target.value });
   }
 
   private setPassword(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  ): void {
     this.setState({ password: event.target.value });
   }
 
-  private loginHandler = () => {
+  private loginHandler = (): void => {
     const { authenticate } = this.props.authStore!;
     authenticate(this.userExists);
   };
 
-  get userExists(): boolean {
+  private get userExists(): boolean {
     return (
       this.state.username === verySecretConfig.USERNAME &&
       this.state.password === verySecretConfig.PASSWORD
