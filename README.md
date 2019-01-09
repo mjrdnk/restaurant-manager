@@ -3,7 +3,7 @@
 ```
 git clone https://github.com/mjrdnk/restaurant-manager.git
 cd restaurant-manager/
-yarn install
+npm install
 npm start
 ```
 
