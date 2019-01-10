@@ -8,7 +8,7 @@ import { observer, inject } from "mobx-react";
 import { IAuthStore } from "../../stores/authStore";
 import { INotificationStore } from "../../stores/notificationStore";
 
-import { verySecretConfig } from "../../config";
+import { verySecretConfig, messages } from "../../config";
 
 interface LoginProps {
   authStore?: IAuthStore;
@@ -79,14 +79,14 @@ class Login extends Component<LoginProps, LoginState> {
   }
 
   private handleLoginError() {
-    this.sendMessage("Wrong username or password.");
+    this.sendMessage(messages.LOGIN.ERROR);
   }
 
   private handleLoginSuccess() {
     const { authenticate } = this.props.authStore!;
 
     authenticate(this.userExists);
-    this.sendMessage("Successfuly logged in!");
+    this.sendMessage(messages.LOGIN.SUCCESS);
   }
 
   private sendMessage(message: string): void {

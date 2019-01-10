@@ -16,10 +16,9 @@ interface LoginProps {
 @inject("authStore")
 @observer
 class Home extends Component<LoginProps> {
-  // isAuthenticated should be retrieved from localstorage
-  isAuthenticated: boolean = true;
-
   render() {
+    const { isAuthenticated } = this.props.authStore!;
+
     return (
       <div className="Home">
         <Navigation />
@@ -29,11 +28,16 @@ class Home extends Component<LoginProps> {
         <Route
           exact
           strict
-          path={`/home/kitchen-orders`}
-          render={() =>
-            this.isAuthenticated ? <DishList /> : <Redirect to="/" />
-          }
+          path="/kitchen-orders"
+          render={() => (isAuthenticated ? <DishList /> : <Redirect to="/" />)}
         />
+        {/* 
+<Route
+          exact
+          strict
+          path={`/home/kitchen-orders`}
+          render={() => (isAuthenticated ? <DishList /> : <Redirect to="/" />)}
+        /> */}
       </div>
     );
   }
