@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import "./NavigationBar.scss";
-import { NavLink } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import Icon from "@material-ui/core/Icon";
 
 import Logout from "../Logout/Logout";
+import NavigationMenu from "../NavigationMenu/NavigationMenu";
 
 class NavigationBar extends Component {
   render() {
@@ -16,9 +14,6 @@ class NavigationBar extends Component {
       <div className="NavigationBar">
         <AppBar position="static">
           <Toolbar className="NavigationBar-Toolbar">
-            <IconButton color="inherit" aria-label="Menu">
-              <Icon>menu</Icon>
-            </IconButton>
             <Typography variant="h6" color="inherit">
               Restaurant Manager
             </Typography>
@@ -26,12 +21,7 @@ class NavigationBar extends Component {
           </Toolbar>
         </AppBar>
 
-        {/* <NavLink className="NavigationBar-link" to="/home">
-          Home
-        </NavLink>
-        <NavLink className="NavigationBar-link" to="/kitchen-orders">
-          Kitchen Orders
-        </NavLink> */}
+        <NavigationMenu />
       </div>
     );
   }

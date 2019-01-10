@@ -1,46 +1,23 @@
-import React, { Component, SyntheticEvent } from "react";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import React, { Component } from "react";
+import "./NavigationMenu.scss";
 
-class SimpleMenu extends Component {
-  state = {
-    anchorEl: null
-  };
+import NavigationMenuItem from "../NavigationMenuItem/NavigationMenuItem";
 
-  handleClick = (event: SyntheticEvent) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
+class NavigationMenu extends Component {
   render() {
-    const { anchorEl } = this.state;
-
     return (
-      <div>
-        <Button
-          aria-owns={anchorEl ? "simple-menu" : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          Open Menu
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>My account</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-        </Menu>
+      <div className="NavigationMenu">
+        <NavigationMenuItem
+          title="Kitchen orders"
+          path="/home/kitchen-orders"
+        />
+        <NavigationMenuItem
+          title="Tables arrangement"
+          path="/home/tables-arrangement"
+        />
       </div>
     );
   }
 }
 
-export default SimpleMenu;
+export default NavigationMenu;
