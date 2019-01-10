@@ -21,13 +21,6 @@ class Notification extends Component<NotificationProps, NotificationState> {
     open: false
   };
 
-  componentDidUpdate(
-    prevProps: NotificationProps,
-    prevState: NotificationState
-  ) {
-    console.log("prevProps: ", prevProps, prevState);
-  }
-
   render() {
     const { open } = this.state;
     const { message } = this.props.notificationStore!;

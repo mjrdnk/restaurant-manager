@@ -9,7 +9,7 @@ class Navigation extends Component {
         <NavLink className="Navigation-link" to="/home">
           Home
         </NavLink>
-        <NavLink className="Navigation-link" to="/home/kitchen-orders">
+        <NavLink className="Navigation-link" to="/kitchen-orders">
           Kitchen Orders
         </NavLink>
       </div>
