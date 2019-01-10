@@ -1,7 +1,10 @@
 export const messages = {
   // This could be connected to some translation system
   LOGIN: {
-    SUCCESS: "Successfuly logged in!",
+    SUCCESS: "Successfully logged in!",
     ERROR: "Wrong username or password."
+  },
+  LOGOUT: {
+    SUCCESS: "Successfully logged out."
   }
 };
