@@ -6,10 +6,13 @@ import Input from "@material-ui/core/Input";
 
 import { observer, inject } from "mobx-react";
 import { IAuthStore } from "../../stores/authStore";
+import { INotificationStore } from "../../stores/notificationStore";
+
 import { verySecretConfig } from "../../config";
 
 interface LoginProps {
   authStore?: IAuthStore;
+  notificationStore?: INotificationStore;
 }
 
 interface LoginState {
@@ -17,6 +20,7 @@ interface LoginState {
   password: string;
 }
 
+@inject("notificationStore")
 @inject("authStore")
 @observer
 class Login extends Component<LoginProps, LoginState> {
@@ -64,8 +68,7 @@ class Login extends Component<LoginProps, LoginState> {
   }
 
   private loginHandler = (): void => {
-    const { authenticate } = this.props.authStore!;
-    authenticate(this.userExists);
+    this.userExists ? this.handleLoginSuccess() : this.handleLoginError();
   };
 
   private get userExists(): boolean {
@@ -73,6 +76,22 @@ class Login extends Component<LoginProps, LoginState> {
       this.state.username === verySecretConfig.USERNAME &&
       this.state.password === verySecretConfig.PASSWORD
     );
+  }
+
+  private handleLoginError() {
+    this.sendMessage("Wrong username or password.");
+  }
+
+  private handleLoginSuccess() {
+    const { authenticate } = this.props.authStore!;
+
+    authenticate(this.userExists);
+    this.sendMessage("Successfuly logged in!");
+  }
+
+  private sendMessage(message: string): void {
+    const { notify } = this.props.notificationStore!;
+    notify(message);
   }
 }
 

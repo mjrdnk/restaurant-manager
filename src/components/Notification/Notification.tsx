@@ -14,14 +14,12 @@ interface NotificationState {
   open: boolean;
 }
 
-inject("notificationStore");
+@inject("notificationStore")
 @observer
 class Notification extends Component<NotificationProps, NotificationState> {
   state = {
-    open: true
+    open: false
   };
-
-  // this.setState({ open: true });
 
   componentDidUpdate(
     prevProps: NotificationProps,
@@ -30,12 +28,10 @@ class Notification extends Component<NotificationProps, NotificationState> {
     console.log("prevProps: ", prevProps, prevState);
   }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   render() {
     const { open } = this.state;
+    const { message } = this.props.notificationStore!;
+
     return (
       <div>
         <Snackbar
@@ -45,11 +41,15 @@ class Notification extends Component<NotificationProps, NotificationState> {
           ContentProps={{
             "aria-describedby": "message-id"
           }}
-          message={<span id="message-id">I love snacks</span>}
+          message={<span id="message-id">{message}</span>}
         />
       </div>
     );
   }
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 }
 
 export default Notification;

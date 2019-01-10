@@ -27,7 +27,6 @@ class App extends Component<AppProps> {
 
     return (
       <div>
-        <Notification />
         <Router>
           <div className="App">
             <Switch>
@@ -48,6 +47,8 @@ class App extends Component<AppProps> {
             </Switch>
           </div>
         </Router>
+
+        <Notification />
       </div>
     );
   }

@@ -2,20 +2,20 @@ import { observable, action, computed } from "mobx";
 import { persist } from "mobx-persist";
 
 export interface INotificationStore {
-  messages: string[];
-  addMessage(message: string): void;
+  message: string;
+  notify(message: string): void;
 }
 
 export class NotificationStore implements INotificationStore {
-  @persist @observable private _messages: string = "";
+  @persist @observable private _message: string = "";
 
   @computed
-  public get messages(): string[] {
-    return JSON.parse(this._messages);
+  public get message(): string {
+    return this._message;
   }
 
   @action.bound
-  public addMessage(message: string): void {
-    this._messages = JSON.stringify([message, ...this.messages]);
+  public notify(message: string): void {
+    this._message = message;
   }
 }
