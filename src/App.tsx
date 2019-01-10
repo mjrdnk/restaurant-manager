@@ -7,11 +7,8 @@ import Notification from "./components/Notification/Notification";
 class App extends Component {
   render() {
     return (
-      <div>
-        <div className="App">
-          <MainRouter />
-        </div>
-
+      <div className="App">
+        <MainRouter />
         <Notification />
       </div>
     );

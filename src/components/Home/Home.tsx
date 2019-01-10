@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import "./Home.scss";
 import { Route, Redirect } from "react-router-dom";
 
-import Navigation from "../Navigation/Navigation";
 import DishList from "../DishList/DishList";
-import Button from "@material-ui/core/Button";
+import NavigationBar from "../NavigationBar/NavigationBar";
 
 import { observer, inject } from "mobx-react";
 import { IAuthStore } from "../../stores/authStore";
@@ -21,9 +20,7 @@ class Home extends Component<LoginProps> {
 
     return (
       <div className="Home">
-        <Navigation />
-        <Button onClick={() => this.logOut()}>Log out</Button>
-        <span>Restaurant manager</span>
+        <NavigationBar />
 
         <Route
           exact
@@ -40,11 +37,6 @@ class Home extends Component<LoginProps> {
         /> */}
       </div>
     );
-  }
-
-  logOut() {
-    const { authenticate } = this.props.authStore!;
-    authenticate(false);
   }
 }
 

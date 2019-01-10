@@ -32,25 +32,31 @@ class Login extends Component<LoginProps, LoginState> {
   render() {
     return (
       <div className="Login">
-        <span>Please login with your username and password</span>
+        <div className="Login-group">
+          <span>Please login with your username and password</span>
 
-        <Input
-          type="username"
-          name="username"
-          placeholder="username..."
-          onChange={e => this.setUsername(e)}
-          value={this.state.username}
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="password..."
-          onChange={e => this.setPassword(e)}
-          value={this.state.password}
-        />
-        <Button variant="contained" color="primary" onClick={this.loginHandler}>
-          Log in
-        </Button>
+          <Input
+            type="username"
+            name="username"
+            placeholder="username..."
+            onChange={e => this.setUsername(e)}
+            value={this.state.username}
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder="password..."
+            onChange={e => this.setPassword(e)}
+            value={this.state.password}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.loginHandler}
+          >
+            Log in
+          </Button>
+        </div>
       </div>
     );
   }
