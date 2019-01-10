@@ -1,12 +1,15 @@
-import { AuthStore } from "./authStore";
 import { create } from "mobx-persist";
+
+import { AuthStore } from "./authStore";
+import { NotificationStore } from "./notificationStore";
 
 interface Stores {
   [key: string]: any;
 }
 
 export const stores: Stores = {
-  authStore: new AuthStore()
+  authStore: new AuthStore(),
+  notificationStore: new NotificationStore()
 };
 
 const hydrate = create({

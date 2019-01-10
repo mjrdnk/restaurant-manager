@@ -6,12 +6,13 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
+import { observer, inject } from "mobx-react";
 
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
+import Notification from "./components/Notification/Notification";
 
-import { observer, inject } from "mobx-react";
 import { IAuthStore } from "./stores/authStore";
 
 interface AppProps {
@@ -25,24 +26,30 @@ class App extends Component<AppProps> {
     const { isAuthenticated } = this.props.authStore!;
 
     return (
-      <Router>
-        <div className="App">
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() =>
-                isAuthenticated ? <Redirect to="/home" /> : <Login />
-              }
-            />
-            <Route
-              path="/home"
-              render={() => (isAuthenticated ? <Home /> : <Redirect to="/" />)}
-            />
-            <Route component={NotFound} />
-          </Switch>
-        </div>
-      </Router>
+      <div>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() =>
+                  isAuthenticated ? <Redirect to="/home" /> : <Login />
+                }
+              />
+              <Route
+                path="/home"
+                render={() =>
+                  isAuthenticated ? <Home /> : <Redirect to="/" />
+                }
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+        </Router>
+
+        <Notification />
+      </div>
     );
   }
 }

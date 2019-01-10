@@ -5,11 +5,14 @@ import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 
 import { observer, inject } from "mobx-react";
-import { IAuthStore, AuthStore } from "../../stores/authStore";
+import { IAuthStore } from "../../stores/authStore";
+import { INotificationStore } from "../../stores/notificationStore";
+
 import { verySecretConfig } from "../../config";
 
 interface LoginProps {
   authStore?: IAuthStore;
+  notificationStore?: INotificationStore;
 }
 
 interface LoginState {
@@ -17,24 +20,19 @@ interface LoginState {
   password: string;
 }
 
+@inject("notificationStore")
 @inject("authStore")
 @observer
 class Login extends Component<LoginProps, LoginState> {
-  constructor(props: LoginProps) {
-    super(props);
-
-    this.state = {
-      password: "",
-      username: ""
-    };
-  }
+  state = {
+    password: "",
+    username: ""
+  };
 
   render() {
     return (
       <div className="Login">
-        <span>
-          Please login with your username and password ({this.state.password})
-        </span>
+        <span>Please login with your username and password</span>
 
         <Input
           type="username"
@@ -59,26 +57,41 @@ class Login extends Component<LoginProps, LoginState> {
 
   private setUsername(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  ): void {
     this.setState({ username: event.target.value });
   }
 
   private setPassword(
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
+  ): void {
     this.setState({ password: event.target.value });
   }
 
-  private loginHandler = () => {
-    const { authenticate } = this.props.authStore!;
-    authenticate(this.userExists);
+  private loginHandler = (): void => {
+    this.userExists ? this.handleLoginSuccess() : this.handleLoginError();
   };
 
-  get userExists(): boolean {
+  private get userExists(): boolean {
     return (
       this.state.username === verySecretConfig.USERNAME &&
       this.state.password === verySecretConfig.PASSWORD
     );
+  }
+
+  private handleLoginError() {
+    this.sendMessage("Wrong username or password.");
+  }
+
+  private handleLoginSuccess() {
+    const { authenticate } = this.props.authStore!;
+
+    authenticate(this.userExists);
+    this.sendMessage("Successfuly logged in!");
+  }
+
+  private sendMessage(message: string): void {
+    const { notify } = this.props.notificationStore!;
+    notify(message);
   }
 }
 
