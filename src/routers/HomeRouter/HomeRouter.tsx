@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 
 import DishList from "../../components/DishList/DishList";
 import TableArranger from "../../components/TableArranger/TableArranger";
-import NotFound from "../../components/NotFound/NotFound";
 
 class HomeRouter extends Component {
   render() {
