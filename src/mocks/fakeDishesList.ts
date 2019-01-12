@@ -1,6 +1,5 @@
-import { IDish } from "../models";
-
-export const fakeDishesList: IDish[] = [
+export const fakeDishesList = `
+[
   {
     "id": 1,
     "name": "Pizza Siciliana",
@@ -8002,3 +8001,4 @@ export const fakeDishesList: IDish[] = [
     "comment": "more pepper"
   }
 ]
+`;

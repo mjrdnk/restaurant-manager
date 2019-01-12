@@ -20,7 +20,7 @@ class DishList extends Component<IDishListState> {
   };
 
   componentDidMount() {
-    this.setState({ dishes: fakeDishesList });
+    this.setState({ dishes: JSON.parse(fakeDishesList) });
   }
 
   render() {
