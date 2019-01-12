@@ -24,12 +24,10 @@ class Notification extends Component<INotificationProps, INotificationState> {
   };
 
   componentDidUpdate(prevProps: INotificationProps) {
-    const { message } = this.props.notificationStore!;
+    const { message } = prevProps.notificationStore!;
 
     if (message && this.state.message !== message) {
       this.setState({ open: true, message });
-
-      // setTimeout(() => this.setState({ open: false, message: "" }), 2000);
     }
   }
 
