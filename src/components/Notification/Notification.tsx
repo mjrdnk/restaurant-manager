@@ -12,14 +12,24 @@ interface INotificationProps {
 
 interface INotificationState {
   open: boolean;
+  message: string;
 }
 
 @inject("notificationStore")
 @observer
 class Notification extends Component<INotificationProps, INotificationState> {
   state = {
-    open: false
+    open: false,
+    message: ""
   };
+
+  componentDidUpdate(prevProps: INotificationProps) {
+    const { message } = this.props.notificationStore!;
+
+    if (message && this.state.message !== message) {
+      this.setState({ open: true, message });
+    }
+  }
 
   render() {
     const { open } = this.state;
