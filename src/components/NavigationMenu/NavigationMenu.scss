@@ -1,6 +1,7 @@
 .NavigationMenu {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-around;
   height: calc(100vh - 64px);
 }
