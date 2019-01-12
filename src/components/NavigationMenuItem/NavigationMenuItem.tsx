@@ -7,19 +7,30 @@ import { Link } from "react-router-dom";
 interface INavigationMenuItemProps {
   title: string;
   path: string;
+  disabled?: boolean;
 }
 
 class NavigationMenuItem extends Component<INavigationMenuItemProps> {
   render() {
-    const { title, path } = this.props;
+    const { title, path, disabled } = this.props;
 
     return (
       <div className="NavigationMenuItem">
-        <Link to={path}>
-          <Button className="NavigationMenuItem-Button" variant="contained">
+        {disabled ? (
+          <Button
+            className="NavigationMenuItem-Button"
+            variant="contained"
+            disabled
+          >
             {title}
           </Button>
-        </Link>
+        ) : (
+          <Link to={path}>
+            <Button className="NavigationMenuItem-Button" variant="contained">
+              {title}
+            </Button>
+          </Link>
+        )}
       </div>
     );
   }

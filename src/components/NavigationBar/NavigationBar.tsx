@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 import Logout from "../Logout/Logout";
-import NavigationMenu from "../NavigationMenu/NavigationMenu";
 
 import { currentPath } from "../../helpers";
 
@@ -16,10 +15,6 @@ interface NavigationBarProps {
 }
 
 class NavigationBar extends Component<NavigationBarProps> {
-  get shouldRenderMenu(): boolean {
-    return !currentPath.isHomeSubroute();
-  }
-
   get shouldRenderBackBtn(): boolean {
     return !!currentPath.isHomeSubroute();
   }
@@ -36,7 +31,6 @@ class NavigationBar extends Component<NavigationBarProps> {
             <Logout />
           </Toolbar>
         </AppBar>
-        {this.shouldRenderMenu ? <NavigationMenu /> : null}
       </div>
     );
   }

@@ -12,6 +12,7 @@ class NavigationMenu extends Component {
           path="/home/kitchen-orders"
         />
         <NavigationMenuItem
+          disabled
           title="Tables arrangement"
           path="/home/tables-arrangement"
         />
