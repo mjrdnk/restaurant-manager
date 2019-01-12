@@ -12,11 +12,13 @@ class DishList extends Component {
 
   render() {
     return (
-      <List>
-        {this.dishes.map((dish, index) => (
-          <DishListItem dish={dish} key={index} />
-        ))}
-      </List>
+      <div className="DishList">
+        <List>
+          {this.dishes.map((dish, index) => (
+            <DishListItem dish={dish} key={index} />
+          ))}
+        </List>
+      </div>
     );
   }
 }

@@ -4,6 +4,8 @@ import "./DishListItem.scss";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import moment from "moment";
+
 import { IDish } from "../../models";
 
 interface IDishListItemProps {
@@ -21,9 +23,12 @@ class DishListItem extends Component<IDishListItemProps> {
     });
   };
 
-  getSecondaryText(dish: IDish): string {
-    const { comment } = dish;
-    return comment ? `${dish.orderedAt}, ${comment}` : `${dish.orderedAt}`;
+  transformTimestamp(timestamp: number): string {
+    return moment(timestamp).format("hh:mm");
+  }
+
+  getTargetDetails(dish: IDish): string {
+    return `${this.transformTimestamp(dish.orderedAt)}, ${dish.table}`;
   }
 
   render() {
@@ -31,16 +36,16 @@ class DishListItem extends Component<IDishListItemProps> {
 
     return (
       <ListItem
+        // plugging real database, key would be probably some id, rather then timestamp
         key={dish.orderedAt}
         role={undefined}
         button
         onClick={this.handleCooked}
       >
-        <ListItemText primary={`q-ty: ${dish.quantity}`} />
-        <ListItemText
-          primary={dish.name}
-          secondary={this.getSecondaryText(dish)}
-        />
+        <ListItemText primary={`${dish.quantity}`} />
+        <ListItemText primary={this.getTargetDetails(dish)} />
+        <ListItemText primary={dish.name} secondary={dish.comment || ""} />
+
         <Checkbox checked={!!this.state.checked} tabIndex={-1} disableRipple />
       </ListItem>
     );
