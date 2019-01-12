@@ -6,17 +6,17 @@ import Snackbar from "@material-ui/core/Snackbar";
 import { observer, inject } from "mobx-react";
 import { INotificationStore } from "../../stores/notificationStore";
 
-interface NotificationProps {
+interface INotificationProps {
   notificationStore?: INotificationStore;
 }
 
-interface NotificationState {
+interface INotificationState {
   open: boolean;
 }
 
 @inject("notificationStore")
 @observer
-class Notification extends Component<NotificationProps, NotificationState> {
+class Notification extends Component<INotificationProps, INotificationState> {
   state = {
     open: false
   };

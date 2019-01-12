@@ -4,12 +4,12 @@ import "./NavigationMenuItem.scss";
 import Button from "@material-ui/core/Button/Button";
 import { Link } from "react-router-dom";
 
-interface NavigationMenuItemProps {
+interface INavigationMenuItemProps {
   title: string;
   path: string;
 }
 
-class NavigationMenuItem extends Component<NavigationMenuItemProps> {
+class NavigationMenuItem extends Component<INavigationMenuItemProps> {
   render() {
     const { title, path } = this.props;
 
