@@ -28,6 +28,8 @@ class Notification extends Component<INotificationProps, INotificationState> {
 
     if (message && this.state.message !== message) {
       this.setState({ open: true, message });
+
+      // setTimeout(() => this.setState({ open: false, message: "" }), 2000);
     }
   }
 
