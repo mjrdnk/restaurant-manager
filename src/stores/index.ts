@@ -12,6 +12,7 @@ export const stores: Stores = {
   notificationStore: new NotificationStore()
 };
 
+// only these stores will be "hydrated"
 const persistantStores: Stores = {
   authStore: new AuthStore()
 };
