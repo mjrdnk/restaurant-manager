@@ -1,0 +1,15 @@
+.DishListItem {
+  &-details {
+    &.quantity {
+      flex: 1;
+    }
+
+    &.target {
+      flex: 2;
+    }
+
+    &.dish {
+      flex: 3;
+    }
+  }
+}

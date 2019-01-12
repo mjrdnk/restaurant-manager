@@ -1,4 +1,5 @@
 export interface IDish {
+  id: number;
   name: string;
   table: string;
   quantity: number;

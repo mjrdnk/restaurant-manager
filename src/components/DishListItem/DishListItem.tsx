@@ -36,15 +36,24 @@ class DishListItem extends Component<IDishListItemProps> {
 
     return (
       <ListItem
-        // plugging real database, key would be probably some id, rather then timestamp
-        key={dish.orderedAt}
-        role={undefined}
+        className="DishListItem"
+        key={dish.id}
         button
         onClick={this.handleCooked}
       >
-        <ListItemText primary={`${dish.quantity}`} />
-        <ListItemText primary={this.getTargetDetails(dish)} />
-        <ListItemText primary={dish.name} secondary={dish.comment || ""} />
+        <ListItemText
+          className="DishListItem-details quantity"
+          primary={`${dish.quantity}`}
+        />
+        <ListItemText
+          className="DishListItem-details target"
+          primary={this.getTargetDetails(dish)}
+        />
+        <ListItemText
+          className="DishListItem-details dish"
+          primary={dish.name}
+          secondary={dish.comment || ""}
+        />
 
         <Checkbox checked={!!this.state.checked} tabIndex={-1} disableRipple />
       </ListItem>
