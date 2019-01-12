@@ -9,7 +9,7 @@ import { INotificationStore } from "../../stores/notificationStore";
 
 import { messages } from "../../config";
 
-interface LogoutProps {
+interface ILogoutProps {
   authStore?: IAuthStore;
   notificationStore?: INotificationStore;
 }
@@ -17,7 +17,7 @@ interface LogoutProps {
 @inject("notificationStore")
 @inject("authStore")
 @observer
-class Logout extends Component<LogoutProps> {
+class Logout extends Component<ILogoutProps> {
   render() {
     return (
       <Button

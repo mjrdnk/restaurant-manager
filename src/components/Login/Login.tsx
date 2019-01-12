@@ -10,12 +10,12 @@ import { INotificationStore } from "../../stores/notificationStore";
 
 import { verySecretConfig, messages } from "../../config";
 
-interface LoginProps {
+interface ILoginProps {
   authStore?: IAuthStore;
   notificationStore?: INotificationStore;
 }
 
-interface LoginState {
+interface ILoginState {
   username: string;
   password: string;
 }
@@ -23,7 +23,7 @@ interface LoginState {
 @inject("notificationStore")
 @inject("authStore")
 @observer
-class Login extends Component<LoginProps, LoginState> {
+class Login extends Component<ILoginProps, ILoginState> {
   state = {
     password: "",
     username: ""
