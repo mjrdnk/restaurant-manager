@@ -6,6 +6,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import moment from "moment";
 
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+
 import { IDish } from "../../models";
 
 interface IDishListItemProps {
@@ -35,28 +37,34 @@ class DishListItem extends Component<IDishListItemProps> {
     const { dish } = this.props;
 
     return (
-      <ListItem
-        className="DishListItem"
-        key={dish.id}
-        button
-        onClick={this.handleCooked}
-      >
-        <ListItemText
-          className="DishListItem-details quantity"
-          primary={`${dish.quantity}`}
-        />
-        <ListItemText
-          className="DishListItem-details target"
-          primary={this.getTargetDetails(dish)}
-        />
-        <ListItemText
-          className="DishListItem-details dish"
-          primary={dish.name}
-          secondary={dish.comment || ""}
-        />
+      <ErrorBoundary>
+        <ListItem
+          className="DishListItem"
+          key={dish.id}
+          button
+          onClick={this.handleCooked}
+        >
+          <ListItemText
+            className="DishListItem-details quantity"
+            primary={`${dish.quantity}`}
+          />
+          <ListItemText
+            className="DishListItem-details target"
+            primary={this.getTargetDetails(dish)}
+          />
+          <ListItemText
+            className="DishListItem-details dish"
+            primary={dish.name}
+            secondary={dish.comment || ""}
+          />
 
-        <Checkbox checked={!!this.state.checked} tabIndex={-1} disableRipple />
-      </ListItem>
+          <Checkbox
+            checked={!!this.state.checked}
+            tabIndex={-1}
+            disableRipple
+          />
+        </ListItem>
+      </ErrorBoundary>
     );
   }
 }

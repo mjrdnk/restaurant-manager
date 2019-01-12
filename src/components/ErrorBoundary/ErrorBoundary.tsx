@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./ErrorBoundary.scss";
 
 interface IErrorBoundaryProps {
-  children: any;
+  children?: any;
 }
 
 interface IErrorBoundaryState {

@@ -2,21 +2,35 @@ import React, { Component } from "react";
 import "./NavigationMenu.scss";
 
 import NavigationMenuItem from "../NavigationMenuItem/NavigationMenuItem";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import { currentPath } from "../../helpers";
 
-class NavigationMenu extends Component {
+interface INavigationMenuState {
+  shouldRenderMenu?: boolean;
+}
+
+class NavigationMenu extends Component<INavigationMenuState> {
+  private get shouldRenderMenu(): boolean {
+    return !currentPath.isHomeSubroute();
+  }
+
   render() {
     return (
-      <div className="NavigationMenu">
-        <NavigationMenuItem
-          title="Kitchen orders"
-          path="/home/kitchen-orders"
-        />
-        <NavigationMenuItem
-          disabled
-          title="Tables arrangement"
-          path="/home/tables-arrangement"
-        />
-      </div>
+      <ErrorBoundary>
+        {this.shouldRenderMenu ? (
+          <div className="NavigationMenu">
+            <NavigationMenuItem
+              title="Kitchen orders"
+              path="/home/kitchen-orders"
+            />
+            <NavigationMenuItem
+              disabled
+              title="Tables arrangement"
+              path="/home/tables-arrangement"
+            />
+          </div>
+        ) : null}
+      </ErrorBoundary>
     );
   }
 }

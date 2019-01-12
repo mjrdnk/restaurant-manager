@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import "./Logout.scss";
 
 import Button from "@material-ui/core/Button";
-
 import { observer, inject } from "mobx-react";
+
 import { IAuthStore } from "../../stores/authStore";
 import { INotificationStore } from "../../stores/notificationStore";
+
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 import { messages } from "../../config";
 
@@ -20,13 +22,15 @@ interface ILogoutProps {
 class Logout extends Component<ILogoutProps> {
   render() {
     return (
-      <Button
-        onClick={this.logoutHandler}
-        variant="contained"
-        color="secondary"
-      >
-        Log out
-      </Button>
+      <ErrorBoundary>
+        <Button
+          onClick={this.logoutHandler}
+          variant="contained"
+          color="secondary"
+        >
+          Log out
+        </Button>
+      </ErrorBoundary>
     );
   }
 

@@ -3,10 +3,12 @@ import "./Login.scss";
 
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
-
 import { observer, inject } from "mobx-react";
+
 import { IAuthStore } from "../../stores/authStore";
 import { INotificationStore } from "../../stores/notificationStore";
+
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 import { verySecretConfig, messages } from "../../config";
 
@@ -32,31 +34,33 @@ class Login extends Component<ILoginProps, ILoginState> {
   render() {
     return (
       <div className="Login">
-        <div className="Login-group">
-          <span>Please login with your username and password</span>
+        <ErrorBoundary>
+          <div className="Login-group">
+            <span>Please login with your username and password</span>
 
-          <Input
-            type="username"
-            name="username"
-            placeholder="username..."
-            onChange={e => this.setUsername(e)}
-            value={this.state.username}
-          />
-          <Input
-            type="password"
-            name="password"
-            placeholder="password..."
-            onChange={e => this.setPassword(e)}
-            value={this.state.password}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.loginHandler}
-          >
-            Log in
-          </Button>
-        </div>
+            <Input
+              type="username"
+              name="username"
+              placeholder="username..."
+              onChange={e => this.setUsername(e)}
+              value={this.state.username}
+            />
+            <Input
+              type="password"
+              name="password"
+              placeholder="password..."
+              onChange={e => this.setPassword(e)}
+              value={this.state.password}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.loginHandler}
+            >
+              Log in
+            </Button>
+          </div>
+        </ErrorBoundary>
       </div>
     );
   }

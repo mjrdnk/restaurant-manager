@@ -4,6 +4,8 @@ import "./NavigationMenuItem.scss";
 import Button from "@material-ui/core/Button/Button";
 import { Link } from "react-router-dom";
 
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+
 interface INavigationMenuItemProps {
   title: string;
   path: string;
@@ -16,21 +18,23 @@ class NavigationMenuItem extends Component<INavigationMenuItemProps> {
 
     return (
       <div className="NavigationMenuItem">
-        {disabled ? (
-          <Button
-            className="NavigationMenuItem-Button"
-            variant="contained"
-            disabled
-          >
-            {title}
-          </Button>
-        ) : (
-          <Link to={path}>
-            <Button className="NavigationMenuItem-Button" variant="contained">
+        <ErrorBoundary>
+          {disabled ? (
+            <Button
+              className="NavigationMenuItem-Button"
+              variant="contained"
+              disabled
+            >
               {title}
             </Button>
-          </Link>
-        )}
+          ) : (
+            <Link to={path}>
+              <Button className="NavigationMenuItem-Button" variant="contained">
+                {title}
+              </Button>
+            </Link>
+          )}
+        </ErrorBoundary>
       </div>
     );
   }

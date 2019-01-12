@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "./Notification.scss";
 
 import Snackbar from "@material-ui/core/Snackbar";
-
 import { observer, inject } from "mobx-react";
+
 import { INotificationStore } from "../../stores/notificationStore";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 interface INotificationProps {
   notificationStore?: INotificationStore;
@@ -18,7 +19,7 @@ interface INotificationState {
 @inject("notificationStore")
 @observer
 class Notification extends Component<INotificationProps, INotificationState> {
-  state = {
+  state: INotificationState = {
     open: false,
     message: ""
   };
@@ -36,7 +37,7 @@ class Notification extends Component<INotificationProps, INotificationState> {
     const { message } = this.props.notificationStore!;
 
     return (
-      <div>
+      <ErrorBoundary>
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={open}
@@ -46,7 +47,7 @@ class Notification extends Component<INotificationProps, INotificationState> {
           }}
           message={<span id="message-id">{message}</span>}
         />
-      </div>
+      </ErrorBoundary>
     );
   }
 
