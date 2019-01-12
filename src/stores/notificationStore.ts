@@ -1,5 +1,4 @@
 import { observable, action, computed } from "mobx";
-import { persist } from "mobx-persist";
 
 export interface INotificationStore {
   message: string;
@@ -7,7 +6,7 @@ export interface INotificationStore {
 }
 
 export class NotificationStore implements INotificationStore {
-  @persist @observable private _message: string = "";
+  @observable private _message: string = "";
 
   @computed
   public get message(): string {

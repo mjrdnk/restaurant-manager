@@ -12,9 +12,13 @@ export const stores: Stores = {
   notificationStore: new NotificationStore()
 };
 
+const persistantStores: Stores = {
+  authStore: new AuthStore()
+};
+
 const hydrate = create({
   storage: localStorage,
   jsonify: true
 });
 
-Object.keys(stores).map(val => hydrate(val, stores[val]));
+Object.keys(persistantStores).map(val => hydrate(val, stores[val]));
