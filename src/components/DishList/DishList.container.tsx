@@ -4,8 +4,9 @@ import { inject, observer } from "mobx-react";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import { INotificationStore } from "../../stores/notificationStore";
 import DishList from "./DishList";
-import { IDish } from "../../models";
-import { messages } from "../../config";
+import { IDish, IPagination } from "../../models";
+import { messages, paginationConfig } from "../../config";
+import Button from "@material-ui/core/Button";
 
 const DISHES_ENDPOINT = "/fakeDishesList.json";
 
@@ -15,6 +16,8 @@ interface IDishListContainerProps {
 
 interface IDishListContainerState {
   dishList: IDish[];
+  cachedDishList: IDish[];
+  pagination: IPagination;
 }
 
 @inject("notificationStore")
@@ -24,11 +27,17 @@ class DishListContainer extends Component<
   IDishListContainerState
 > {
   state: IDishListContainerState = {
-    dishList: []
+    dishList: [],
+    cachedDishList: [],
+    pagination: {
+      position: paginationConfig.POSITION,
+      pageSize: paginationConfig.PAGE_SIZE
+    }
   };
 
-  // this could be done in MobX store
-  // caching could be done also
+  // done in the container for simplicity
+  // as it's the only 'API' call in the app,
+  // but could be moved to MobX store and cached,
   async fetchDishes(): Promise<IDish[]> {
     return await fetch(DISHES_ENDPOINT, {
       method: "GET",
@@ -37,6 +46,7 @@ class DishListContainer extends Component<
         Accept: "application/json"
       }
     })
+      // res could have probably some better type
       .then((res: any) => {
         return res ? (res.json() as IDish[]) : [];
       })
@@ -51,21 +61,59 @@ class DishListContainer extends Component<
       });
   }
 
-  componentDidMount() {
+  appendDishes(position: number, pageSize: number): void {
     const { dishList } = this.state;
 
+    // pagination should be done on the server side
+    this.setState({
+      dishList: [...dishList, ...this.getCacheSlice(position, pageSize)],
+      pagination: {
+        position: ++position,
+        pageSize
+      }
+    });
+  }
+
+  getCacheSlice(position: number, pageSize: number): IDish[] {
+    const { cachedDishList } = this.state;
+    const startIndex = pageSize * position + position;
+    const endIndex = (position + 1) * pageSize + position;
+
+    const cacheSlice = cachedDishList.filter(
+      (cachedDish: IDish, index: number) =>
+        index >= startIndex && index <= endIndex
+    );
+
+    console.log("cache slice: ", cacheSlice);
+
+    return cacheSlice;
+  }
+
+  componentDidMount() {
+    const { dishList, pagination } = this.state;
+
     if (dishList.length === 0) {
-      this.fetchDishes().then((response: IDish[]) =>
-        this.setState({ dishList: response })
-      );
+      this.fetchDishes().then((response: IDish[]) => {
+        this.setState({ cachedDishList: response });
+        this.appendDishes(pagination.position, pagination.pageSize);
+      });
     }
   }
 
   render() {
-    const { dishList } = this.state;
+    const { dishList, pagination } = this.state;
+
+    console.log("pagination: ", pagination);
 
     return (
       <ErrorBoundary>
+        <Button
+          onClick={() =>
+            this.appendDishes(pagination.position, pagination.pageSize)
+          }
+        >
+          Load more
+        </Button>
         <DishList dishList={dishList} />
       </ErrorBoundary>
     );
