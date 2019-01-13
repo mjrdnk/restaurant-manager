@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./NavigationMenuItem.scss";
 
 import Button from "@material-ui/core/Button/Button";
-import { Link } from "react-router-dom";
 
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import NavigationLink from "../NavigationLink/NavigationLink";
 
 interface INavigationMenuItemProps {
   title: string;
@@ -28,11 +28,11 @@ class NavigationMenuItem extends Component<INavigationMenuItemProps> {
               {title}
             </Button>
           ) : (
-            <Link to={path}>
+            <NavigationLink to={path}>
               <Button className="NavigationMenuItem-Button" variant="contained">
                 {title}
               </Button>
-            </Link>
+            </NavigationLink>
           )}
         </ErrorBoundary>
       </div>
