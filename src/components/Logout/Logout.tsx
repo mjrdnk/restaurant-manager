@@ -19,15 +19,17 @@ interface ILogoutProps {
 class Logout extends Component<ILogoutProps> {
   render() {
     return (
-      <ErrorBoundary>
-        <Button
-          onClick={this.logoutHandler}
-          variant="contained"
-          color="secondary"
-        >
-          Log out
-        </Button>
-      </ErrorBoundary>
+      <div className="Logout">
+        <ErrorBoundary>
+          <Button
+            onClick={this.logoutHandler}
+            variant="contained"
+            color="secondary"
+          >
+            Log out
+          </Button>
+        </ErrorBoundary>
+      </div>
     );
   }
 
