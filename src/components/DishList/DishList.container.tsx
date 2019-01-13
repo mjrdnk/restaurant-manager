@@ -5,10 +5,7 @@ import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import { INotificationStore } from "../../stores/notificationStore";
 import DishList from "./DishList";
 import { IDish, IPagination } from "../../models";
-import { messages, paginationConfig } from "../../config";
-import Button from "@material-ui/core/Button";
-
-const DISHES_ENDPOINT = "/fakeDishesList.json";
+import { messages, paginationConfig, endpoints } from "../../config";
 
 interface IDishListContainerProps {
   notificationStore?: INotificationStore;
@@ -18,6 +15,7 @@ interface IDishListContainerState {
   dishList: IDish[];
   cachedDishList: IDish[];
   pagination: IPagination;
+  canFetchMore: boolean;
 }
 
 @inject("notificationStore")
@@ -26,20 +24,26 @@ class DishListContainer extends Component<
   IDishListContainerProps,
   IDishListContainerState
 > {
-  state: IDishListContainerState = {
-    dishList: [],
-    cachedDishList: [],
-    pagination: {
-      position: paginationConfig.POSITION,
-      pageSize: paginationConfig.PAGE_SIZE
-    }
-  };
+  constructor(props: IDishListContainerProps) {
+    super(props);
+    this.state = {
+      dishList: [],
+      cachedDishList: [],
+      pagination: {
+        position: paginationConfig.POSITION,
+        pageSize: paginationConfig.PAGE_SIZE
+      },
+      canFetchMore: true
+    };
+
+    this.handleLoadMore = this.handleLoadMore.bind(this);
+  }
 
   // done in the container for simplicity
   // as it's the only 'API' call in the app,
   // but could be moved to MobX store and cached,
   async fetchDishes(): Promise<IDish[]> {
-    return await fetch(DISHES_ENDPOINT, {
+    return await fetch(endpoints.DISHES_ENDPOINT, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -64,13 +68,16 @@ class DishListContainer extends Component<
   appendDishes(position: number, pageSize: number): void {
     const { dishList } = this.state;
 
+    const newDishes = this.getCacheSlice(position, pageSize);
+
     // pagination should be done on the server side
     this.setState({
-      dishList: [...dishList, ...this.getCacheSlice(position, pageSize)],
+      dishList: [...dishList, ...newDishes],
       pagination: {
         position: ++position,
         pageSize
-      }
+      },
+      canFetchMore: newDishes.length >= pageSize
     });
   }
 
@@ -80,13 +87,19 @@ class DishListContainer extends Component<
     const endIndex = (position + 1) * pageSize + position;
 
     const cacheSlice = cachedDishList.filter(
-      (cachedDish: IDish, index: number) =>
+      (_cachedDish: IDish, index: number) =>
         index >= startIndex && index <= endIndex
     );
 
     console.log("cache slice: ", cacheSlice);
 
     return cacheSlice;
+  }
+
+  handleLoadMore(): void {
+    const { pagination } = this.state;
+
+    this.appendDishes(pagination.position, pagination.pageSize);
   }
 
   componentDidMount() {
@@ -101,20 +114,15 @@ class DishListContainer extends Component<
   }
 
   render() {
-    const { dishList, pagination } = this.state;
-
-    console.log("pagination: ", pagination);
+    const { dishList, canFetchMore } = this.state;
 
     return (
       <ErrorBoundary>
-        <Button
-          onClick={() =>
-            this.appendDishes(pagination.position, pagination.pageSize)
-          }
-        >
-          Load more
-        </Button>
-        <DishList dishList={dishList} />
+        <DishList
+          dishList={dishList}
+          canFetchMore={canFetchMore}
+          onLoadMore={this.handleLoadMore}
+        />
       </ErrorBoundary>
     );
   }
