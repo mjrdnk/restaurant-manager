@@ -35,27 +35,29 @@ class Login extends Component<ILoginProps, ILoginState> {
           <div className="Login-group">
             <span>Please login with your username and password</span>
 
-            <Input
-              type="username"
-              name="username"
-              placeholder="username..."
-              onChange={e => this.setUsername(e)}
-              value={this.state.username}
-            />
-            <Input
-              type="password"
-              name="password"
-              placeholder="password..."
-              onChange={e => this.setPassword(e)}
-              value={this.state.password}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.loginHandler}
-            >
-              Log in
-            </Button>
+            <form className="Login-form" noValidate autoComplete="off">
+              <Input
+                type="username"
+                name="username"
+                placeholder="username..."
+                onChange={e => this.setUsername(e)}
+                value={this.state.username}
+              />
+              <Input
+                type="password"
+                name="password"
+                placeholder="password..."
+                onChange={e => this.setPassword(e)}
+                value={this.state.password}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.loginHandler}
+              >
+                Log in
+              </Button>
+            </form>
           </div>
         </ErrorBoundary>
       </div>
