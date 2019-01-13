@@ -1,1 +1,1 @@
-export * from "./fakeDishesList";
+export * from "./dishList.mock";

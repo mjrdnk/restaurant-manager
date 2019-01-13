@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import DishList from "../../components/DishList/DishList";
+import DishListContainer from "../../components/DishList/DishList.container";
 import TableArranger from "../../components/TableArranger/TableArranger";
 
 class HomeRouter extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/home/kitchen-orders" component={DishList} />
+        <Route path="/home/kitchen-orders" component={DishListContainer} />
         <Route path="/home/tables-arrangement" component={TableArranger} />
       </Switch>
     );

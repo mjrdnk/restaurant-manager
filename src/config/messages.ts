@@ -6,5 +6,8 @@ export const messages = {
   },
   LOGOUT: {
     SUCCESS: "Successfully logged out."
+  },
+  DISH_LIST: {
+    ERROR: "List couldn't be fetched this time."
   }
 };

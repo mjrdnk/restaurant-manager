@@ -26,7 +26,7 @@ interface ILoginState {
 @inject("authStore")
 @observer
 class Login extends Component<ILoginProps, ILoginState> {
-  state = {
+  state: ILoginState = {
     password: "",
     username: ""
   };

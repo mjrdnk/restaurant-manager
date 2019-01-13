@@ -8,29 +8,18 @@ import DishListItem from "../DishListItem/DishListItem";
 
 import { IDish } from "../../models";
 
-import { fakeDishesList } from "../../mocks";
-
-interface IDishListState {
-  dishes: IDish[];
+interface IDishListProps {
+  dishList: IDish[];
 }
 
-class DishList extends Component<IDishListState> {
-  state: IDishListState = {
-    dishes: []
-  };
-
-  componentDidMount() {
-    this.setState({ dishes: JSON.parse(fakeDishesList) });
-  }
-
+class DishList extends Component<IDishListProps> {
   render() {
-    const { dishes } = this.state;
-
+    const { dishList } = this.props;
     return (
       <div className="DishList">
         <ErrorBoundary>
           <List>
-            {dishes.map((dish, index) => (
+            {dishList.map((dish, index) => (
               <DishListItem dish={dish} key={index} />
             ))}
           </List>
