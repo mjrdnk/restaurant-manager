@@ -1,46 +1,22 @@
 import React, { Component } from "react";
+
 import "./Home.scss";
-import { Route, Redirect } from "react-router-dom";
+import HomeRouter from "../../routers/HomeRouter/HomeRouter";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import NavigationBar from "../NavigationBar/NavigationBar";
+import NavigationMenu from "../NavigationMenu/NavigationMenu";
 
-import Navigation from "../Navigation/Navigation";
-import DishList from "../DishList/DishList";
-import Button from "@material-ui/core/Button";
-
-import { observer, inject } from "mobx-react";
-import { IAuthStore } from "../../stores/authStore";
-
-interface LoginProps {
-  authStore?: IAuthStore;
-}
-
-@inject("authStore")
-@observer
-class Home extends Component<LoginProps> {
-  // isAuthenticated should be retrieved from localstorage
-  isAuthenticated: boolean = true;
-
+class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <Navigation />
-        <Button onClick={() => this.logOut()}>Log out</Button>
-        <span>Restaurant manager</span>
-
-        <Route
-          exact
-          strict
-          path={`/home/kitchen-orders`}
-          render={() =>
-            this.isAuthenticated ? <DishList /> : <Redirect to="/" />
-          }
-        />
+        <ErrorBoundary>
+          <NavigationBar />
+          <NavigationMenu />
+          <HomeRouter />
+        </ErrorBoundary>
       </div>
     );
-  }
-
-  logOut() {
-    const { authenticate } = this.props.authStore!;
-    authenticate(false);
   }
 }
 
