@@ -109,6 +109,7 @@ class DishListContainer extends Component<
   }
 
   componentDidMount() {
+    console.log("BELOW CONSOLE LOGS ARE JUST TO PRESENT PAGINATION.");
     const { dishList, pagination } = this.state;
 
     if (dishList.length === 0) {
@@ -117,6 +118,10 @@ class DishListContainer extends Component<
         this.appendDishes(pagination.position, pagination.pageSize);
       });
     }
+  }
+
+  componentWillUnmount() {
+    console.log("END OF PAGINATION PRESENTATION.");
   }
 
   render() {
