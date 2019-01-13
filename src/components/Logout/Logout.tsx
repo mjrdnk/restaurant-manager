@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import "./Logout.scss";
-
-import Button from "@material-ui/core/Button";
 import { observer, inject } from "mobx-react";
+import Button from "@material-ui/core/Button";
 
+import "./Logout.scss";
 import { IAuthStore } from "../../stores/authStore";
-import { INotificationStore } from "../../stores/notificationStore";
-
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
-
 import { messages } from "../../config";
+import { INotificationStore } from "../../stores/notificationStore";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 interface ILogoutProps {
   authStore?: IAuthStore;

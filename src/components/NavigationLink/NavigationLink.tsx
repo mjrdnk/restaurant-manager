@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import "./NavigationLink.scss";
-
 import { Link } from "react-router-dom";
 
+import "./NavigationLink.scss";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 interface NavigationLinkProps {

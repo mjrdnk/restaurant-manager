@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import "./Notification.scss";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import { observer, inject } from "mobx-react";
 
+import "./Notification.scss";
 import { INotificationStore } from "../../stores/notificationStore";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 

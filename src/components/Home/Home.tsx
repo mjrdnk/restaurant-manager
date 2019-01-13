@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./Home.scss";
 
+import "./Home.scss";
+import HomeRouter from "../../routers/HomeRouter/HomeRouter";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import NavigationBar from "../NavigationBar/NavigationBar";
-import HomeRouter from "../../routers/HomeRouter/HomeRouter";
 import NavigationMenu from "../NavigationMenu/NavigationMenu";
 
 class Home extends Component {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 class TableArranger extends Component {

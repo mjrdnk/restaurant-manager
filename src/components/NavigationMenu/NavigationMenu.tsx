@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./NavigationMenu.scss";
 
+import "./NavigationMenu.scss";
+import { currentPath } from "../../helpers";
 import NavigationMenuItem from "../NavigationMenuItem/NavigationMenuItem";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
-import { currentPath } from "../../helpers";
 
 interface INavigationMenuState {
   shouldRenderMenu?: boolean;

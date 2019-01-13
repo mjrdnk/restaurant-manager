@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import "./NavigationMenuItem.scss";
-
 import Button from "@material-ui/core/Button/Button";
 
+import "./NavigationMenuItem.scss";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import NavigationLink from "../NavigationLink/NavigationLink";
 

@@ -1,16 +1,13 @@
 import React, { Component } from "react";
-import "./Login.scss";
-
+import { observer, inject } from "mobx-react";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
-import { observer, inject } from "mobx-react";
 
+import "./Login.scss";
 import { IAuthStore } from "../../stores/authStore";
 import { INotificationStore } from "../../stores/notificationStore";
-
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
-
 import { verySecretConfig, messages } from "../../config";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 interface ILoginProps {
   authStore?: IAuthStore;

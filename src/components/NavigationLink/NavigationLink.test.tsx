@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+
 import NavigationLink from "./NavigationLink";
 
 describe("NavigationLink component", () => {

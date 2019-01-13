@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import { INotificationStore } from "../../stores/notificationStore";
-import DishList from "./DishList";
 import { IDish, IPagination } from "../../models";
 import { messages, paginationConfig, endpoints } from "../../config";
+import DishList from "./DishList";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 interface IDishListContainerProps {
   notificationStore?: INotificationStore;
@@ -41,7 +41,7 @@ class DishListContainer extends Component<
 
   // done in the container for simplicity
   // as it's the only 'API' call in the app,
-  // but could be moved to MobX store and cached,
+  // but could be moved to MobX store and cached.
   async fetchDishes(): Promise<IDish[]> {
     return await fetch(endpoints.DISHES_ENDPOINT, {
       method: "GET",
@@ -52,6 +52,7 @@ class DishListContainer extends Component<
     })
       // res could have probably some better type
       .then((res: any) => {
+        // JSON comes already sorted by createdAt
         return res ? (res.json() as IDish[]) : [];
       })
       .catch(err => {
@@ -91,7 +92,12 @@ class DishListContainer extends Component<
         index >= startIndex && index <= endIndex
     );
 
-    console.log("cache slice: ", cacheSlice);
+    console.info(
+      "Cache slice ",
+      cacheSlice,
+      " got appended to ",
+      this.state.dishList
+    );
 
     return cacheSlice;
   }

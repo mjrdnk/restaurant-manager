@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import "./DishListItem.scss";
-
+import moment from "moment";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
-import moment from "moment";
 
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
-
+import "./DishListItem.scss";
 import { IDish } from "../../models";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 interface IDishListItemProps {
   dish: IDish;
