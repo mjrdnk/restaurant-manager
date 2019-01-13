@@ -85,11 +85,11 @@ class Login extends Component<ILoginProps, ILoginState> {
     );
   }
 
-  private handleLoginError() {
+  private handleLoginError(): void {
     this.sendMessage(messages.LOGIN.ERROR);
   }
 
-  private handleLoginSuccess() {
+  private handleLoginSuccess(): void {
     const { authenticate } = this.props.authStore!;
 
     authenticate(this.userExists);
