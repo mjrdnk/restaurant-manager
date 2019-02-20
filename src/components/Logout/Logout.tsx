@@ -34,6 +34,7 @@ class Logout extends Component<ILogoutProps> {
   }
 
   private logoutHandler = (): void => {
+    // https://stackoverflow.com/questions/47704652/what-does-exclamation-point-after-variable-mean-in-javascript
     const { authenticate } = this.props.authStore!;
     authenticate(false);
 
